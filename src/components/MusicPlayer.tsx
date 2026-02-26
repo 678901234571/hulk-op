@@ -38,15 +38,19 @@ export const MusicPlayer = () => {
         width: '0',
         videoId: videoId,
         playerVars: {
-          autoplay: 0,
+          autoplay: 1,
           controls: 0,
           showinfo: 0,
           rel: 0,
           loop: 1,
-          playlist: videoId
+          playlist: videoId,
+          mute: 0
         },
         events: {
-          onReady: () => setIsReady(true),
+          onReady: (event: any) => {
+            setIsReady(true);
+            event.target.playVideo();
+          },
           onStateChange: (event: any) => {
             if (event.data === window.YT.PlayerState.PLAYING) {
               setIsPlaying(true);
